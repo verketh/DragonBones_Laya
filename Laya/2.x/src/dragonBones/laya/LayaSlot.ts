@@ -74,11 +74,8 @@ namespace dragonBones {
         protected _replaceDisplay(value: any): void {
             const container = this._armature.display as LayaArmatureDisplay;
             const prevDisplay = value as Laya.Sprite;
-            container.addChild(this._renderDisplay);
             container.replaceChild(this._renderDisplay, prevDisplay);
-            //container.swapChildren(this._renderDisplay, prevDisplay);
             container.removeChild(prevDisplay);
-            this._textureScale = 1.0;
         }
 
         protected _removeDisplay(): void {
@@ -92,6 +89,7 @@ namespace dragonBones {
                 return;
             }
 
+            container.removeChild(this._renderDisplay);
             container.addChildAt(this._renderDisplay, this._zOrder);
         }
         /**
