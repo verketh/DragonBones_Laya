@@ -19,7 +19,6 @@ export default class TestDragonBonesScene extends ui.test.TestDragonBonesSceneUI
     }
 
     onLoadFinish() {
-        dragonBones.LayaFactory.init();
         const factory = dragonBones.LayaFactory.factory;
         // factory.parseDragonBonesData(this.game.cache.getItem("resource/mecha_1002_101d_show/mecha_1002_101d_show_ske.json", Phaser.Cache.JSON).data);
         let data = Laya.loader.getRes("res/jdmachao/jdmachao_ske.dbbin");
@@ -29,9 +28,6 @@ export default class TestDragonBonesScene extends ui.test.TestDragonBonesSceneUI
             Laya.loader.getRes("res/jdmachao/jdmachao_tex.json"),
             Laya.loader.getRes("res/jdmachao/jdmachao_tex.png")
         );
-        Laya.timer.frameLoop(1, this, () => {
-            dragonBones.LayaFactory.factory.clock.advanceTime(0.016);
-        })
 
         const armatureDisplay = factory.buildArmatureDisplay("jdmachao");
         armatureDisplay.animation.play("jn_r", 0);

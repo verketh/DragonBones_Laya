@@ -1,2 +1,6 @@
 .rpt2_cache
 .laya/chrome/
+bin/js/
+!bin/
+!bin/libs
+!libs/
