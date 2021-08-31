@@ -6,9 +6,7 @@
 ```
 Your project
     |-- libs
-        |-- phaser.d.ts
-        |-- pixi.d.ts
-        |-- p2.d.ts
+        |-- LayaAir.d.ts
     |-- node_modules
         |-- ...
     |-- out
@@ -18,5 +16,5 @@ Your project
     |-- ...
 ```
 
-## Phaser declaration
-* [Get phaser.d.ts, pixi.d.ts, p2.d.ts](https://github.com/photonstorm/phaser-ce/tree/master/typescript/)
+## LayaAir declaration
+* [Get LayaAir.d.ts](https://github.com/layabox/LayaAir)
