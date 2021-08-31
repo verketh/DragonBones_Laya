@@ -40,10 +40,6 @@ namespace dragonBones {
         private static _dragonBonesInstance: DragonBones = null as any;
         private static _factory: LayaFactory = null as any;
 
-        public static init(): void {
-            const eventManager = new LayaArmatureDisplay();
-            LayaFactory._dragonBonesInstance = new DragonBones(eventManager);
-        }
         /**
          * - A global factory instance that can be used directly.
          * @version DragonBones 4.7
@@ -61,20 +57,41 @@ namespace dragonBones {
 
             return LayaFactory._factory;
         }
+
+        /**
+         * 帧事件
+         */
+        private static _clockHandler(): void {
+            const passedTime = Laya.timer.delta * 0.001;
+
+            LayaFactory._dragonBonesInstance.advanceTime(passedTime);
+
+        }
+
         /**
          * @inheritDoc
          */
         public constructor(dataParser: DataParser | null = null) {
             super(dataParser);
 
+            if (LayaFactory._dragonBonesInstance === null) {
+                //
+                const eventManager = new LayaArmatureDisplay();
+                LayaFactory._dragonBonesInstance = new DragonBones(eventManager);
+                Laya.timer.frameLoop(1, this, LayaFactory._clockHandler);
+            }
+
             this._dragonBones = LayaFactory._dragonBonesInstance;
         }
+
+        
 
         protected _isSupportMesh(): boolean {
             console.warn("Laya-ce can not support mesh.");
 
             return false;
         }
+
 
         protected _buildTextureAtlasData(textureAtlasData: LayaTextureAtlasData | null, textureAtlas: Laya.Texture | null): LayaTextureAtlasData {
             if (textureAtlasData) {

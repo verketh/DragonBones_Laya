@@ -34,7 +34,7 @@ namespace dragonBones {
     /**
      * @inheritDoc
      */
-    export class LayaSlotDisplay extends Laya.Image {
+    export class LayaSlotDisplay extends Laya.Sprite {
         /**
          * @inheritDoc
          */

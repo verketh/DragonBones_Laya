@@ -43,7 +43,7 @@ namespace dragonBones {
             super._onClear();
 
             if (this._renderTexture !== null) {
-                // this._renderTexture.dispose();
+                this._renderTexture.destroy();
             }
 
             this._renderTexture = null;
@@ -77,13 +77,6 @@ namespace dragonBones {
             if (this._renderTexture !== null) {
                 for (let k in this.textures) {
                     const textureData = this.textures[k] as LayaTextureData;
-
-                    // textureData.renderTexture = new Laya.Texture(
-                    //     this._renderTexture,
-                    //     <any>textureData.region as PIXI.Rectangle, // No need to set frame.
-                    //     <any>textureData.region as PIXI.Rectangle,
-                    //     new PIXI.Rectangle(0, 0, textureData.region.width, textureData.region.height),
-                    // ); // Laya-ce can not support texture rotate. TODO
                     textureData.renderTexture = Laya.Texture.create(
                         this._renderTexture,
                         textureData.region.x,
@@ -96,6 +89,9 @@ namespace dragonBones {
             else {
                 for (let k in this.textures) {
                     const textureData = this.textures[k] as LayaTextureData;
+                    if(textureData.renderTexture){
+                        textureData.renderTexture.destroy();
+                    }
                     textureData.renderTexture = null;
                 }
             }
@@ -115,7 +111,7 @@ namespace dragonBones {
             super._onClear();
 
             if (this.renderTexture !== null) {
-                this.renderTexture.destroy(false);
+                this.renderTexture.destroy();
             }
 
             this.renderTexture = null;

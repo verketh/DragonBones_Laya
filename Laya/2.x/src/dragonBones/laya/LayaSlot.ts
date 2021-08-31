@@ -226,17 +226,8 @@ namespace dragonBones {
         protected _updateTransform(): void {
             this.updateGlobalTransform(); // Update transform.
 
-            //const transform = this.global;
-
-            // if (this._renderDisplay === this._rawDisplay || this._renderDisplay === this._meshDisplay) {
-            //     const x = transform.x - (this.globalTransformMatrix.a * this._pivotX + this.globalTransformMatrix.c * this._pivotY);
-            //     const y = transform.y - (this.globalTransformMatrix.b * this._pivotX + this.globalTransformMatrix.d * this._pivotY);
-
-            //     this._renderDisplay.x = x;
-            //     this._renderDisplay.y = y;
-            // }
             if (!this._renderDisplay.transform) {
-                this._renderDisplay.transform = new Laya.Matrix;
+                this._renderDisplay.transform = new Laya.Matrix();
             }
             const globalTransformMatrix = this.globalTransformMatrix;
             if (this._renderDisplay === this._rawDisplay || this._renderDisplay === this._meshDisplay) {
@@ -249,8 +240,6 @@ namespace dragonBones {
                 displayMatrix.ty = this.globalTransformMatrix.ty - (this.globalTransformMatrix.b * this._pivotX + this.globalTransformMatrix.d * this._pivotY);
             }
             else {
-                // this._renderDisplay.x = transform.x;
-                // this._renderDisplay.y = transform.y;
                 const displayMatrix = this._renderDisplay.transform;
                 displayMatrix.a = globalTransformMatrix.a;
                 displayMatrix.b = globalTransformMatrix.b;
@@ -259,20 +248,26 @@ namespace dragonBones {
                 displayMatrix.tx = globalTransformMatrix.tx;
                 displayMatrix.ty = globalTransformMatrix.ty;
             }
-
-            // this._renderDisplay.rotation = transform.rotation;
-            // (this._renderDisplay as any).skew = transform.skew; // Phase can not support skew.
-            // this._renderDisplay.scaleX = transform.scaleX * this._textureScale;
-            // this._renderDisplay.scaleY = transform.scaleY * this._textureScale;
         }
 
         protected _identityTransform(): void {
-            this._renderDisplay.x = 0.0;
-            this._renderDisplay.y = 0.0;
-            this._renderDisplay.rotation = 0.0;
-            (this._renderDisplay as any).skew = 0.0;
-            this._renderDisplay.scaleX = 1.0;
-            this._renderDisplay.scaleY = 1.0;
+            // this._renderDisplay.x = 0.0;
+            // this._renderDisplay.y = 0.0;
+            // this._renderDisplay.rotation = 0.0;
+            // (this._renderDisplay as any).skew = 0.0;
+            // this._renderDisplay.scaleX = 1.0;
+            // this._renderDisplay.scaleY = 1.0;
+
+            if (!this._renderDisplay.transform) {
+                this._renderDisplay.transform = new Laya.Matrix();
+            }
+            const displayMatrix = this._renderDisplay.transform;
+            displayMatrix.a = 1.0;
+            displayMatrix.b = 0.0;
+            displayMatrix.c = 0.0;
+            displayMatrix.d = 1.0;
+            displayMatrix.tx = 0.0;
+            displayMatrix.ty = 0.0;
         }
     }
 }
