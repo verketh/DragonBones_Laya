@@ -14666,11 +14666,8 @@ var dragonBones;
         _replaceDisplay(value) {
             const container = this._armature.display;
             const prevDisplay = value;
-            container.addChild(this._renderDisplay);
             container.replaceChild(this._renderDisplay, prevDisplay);
-            //container.swapChildren(this._renderDisplay, prevDisplay);
             container.removeChild(prevDisplay);
-            this._textureScale = 1.0;
         }
         _removeDisplay() {
             this._renderDisplay.parent.removeChild(this._renderDisplay);
@@ -14681,6 +14678,7 @@ var dragonBones;
             if (index === this._zOrder) {
                 return;
             }
+            container.removeChild(this._renderDisplay);
             container.addChildAt(this._renderDisplay, this._zOrder);
         }
         /**
